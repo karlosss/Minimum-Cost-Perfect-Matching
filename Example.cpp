@@ -7,7 +7,7 @@
 #include <sstream>
 using namespace std;
 
-pair< Graph, vector<double> > CreateRandomGraph()
+pair< Graph, vector<T_WEIGHT> > CreateRandomGraph()
 {
 	//random seed
 	int x;
@@ -18,7 +18,7 @@ pair< Graph, vector<double> > CreateRandomGraph()
 	int n = 50;
 
 	Graph G(n);
-	vector<double> cost;
+	vector<T_WEIGHT> cost;
 	for(int i = 0; i < n; i++)
 		for(int j = i+1; j < n; j++)
 			if(rand()%10 == 0)
@@ -64,7 +64,7 @@ Graph ReadGraph(string filename)
 	return G;
 }
 
-pair< Graph, vector<double> > ReadWeightedGraph(string filename)
+pair< Graph, vector<T_WEIGHT> > ReadWeightedGraph(string filename)
 {
 	//Please see Graph.h for a description of the interface
 
@@ -83,14 +83,14 @@ pair< Graph, vector<double> > ReadWeightedGraph(string filename)
 	ss >> m;
 
 	Graph G(n);
-	vector<double> cost(m);
+	vector<T_WEIGHT> cost(m);
 	for(int i = 0; i < m; i++)
 	{
 		getline(file, s);
 		ss.str(s);
 		ss.clear();
 		int u, v;
-		double c;
+		T_WEIGHT c;
 		ss >> u >> v >> c;
 
 		G.AddEdge(u, v);
@@ -104,11 +104,11 @@ pair< Graph, vector<double> > ReadWeightedGraph(string filename)
 void MinimumCostPerfectMatchingExample(string filename)
 {
 	Graph G;
-	vector<double> cost;
+	vector<T_WEIGHT> cost;
 	
 	//Read the graph
-	pair< Graph, vector<double> > p = ReadWeightedGraph(filename);
-	//pair< Graph, vector<double> > p = CreateRandomGraph();
+	pair< Graph, vector<T_WEIGHT> > p = ReadWeightedGraph(filename);
+	//pair< Graph, vector<T_WEIGHT> > p = CreateRandomGraph();
 	G = p.first;
 	cost = p.second;
 
@@ -116,10 +116,10 @@ void MinimumCostPerfectMatchingExample(string filename)
 	Matching M(G);
 
 	//Pass the costs to solve the problem
-	pair< list<int>, double > solution = M.SolveMinimumCostPerfectMatching(cost);
+	pair< list<int>, T_WEIGHT > solution = M.SolveMinimumCostPerfectMatching(cost);
 
 	list<int> matching = solution.first;
-	double obj = solution.second;
+	T_WEIGHT obj = solution.second;
 
 	cout << "Optimal matching cost: " << obj << endl;
 	cout << "Edges in the matching:" << endl;

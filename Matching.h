@@ -22,7 +22,7 @@ public:
 	//Returns a pair
 	//the first element of the pair is a list of the indices of the edges in the matching
 	//the second is the cost of the matching
-	pair< list<int>, double > SolveMinimumCostPerfectMatching(const vector<double> & cost);
+	pair< list<int>, T_WEIGHT > SolveMinimumCostPerfectMatching(const vector<T_WEIGHT> & cost);
 
 	//Solves the maximum cardinality matching problem
 	//Returns a list with the indices of the edges in the matching
@@ -75,8 +75,8 @@ private:
 	vector<int> root;//root[v] gives the root of v in the alternating forest 
 
 	vector<bool> blocked;//A blossom can be blocked due to dual costs, this means that it behaves as if it were an original vertex and cannot be expanded
-	vector<double> dual;//dual multipliers associated to the blossoms, if dual[v] > 0, the blossom is blocked and full
-	vector<double> slack;//slack associated to each edge, if slack[e] > 0, the edge cannot be used
+	vector<T_WEIGHT> dual;//dual multipliers associated to the blossoms, if dual[v] > 0, the blossom is blocked and full
+	vector<T_WEIGHT> slack;//slack associated to each edge, if slack[e] > 0, the edge cannot be used
 	vector<int> mate;//mate[v] gives the mate of v
 
 	int m, n;

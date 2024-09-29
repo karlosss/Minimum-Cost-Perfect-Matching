@@ -7,7 +7,7 @@ void BinaryHeap::Clear()
 	satellite.clear();
 }
 
-void BinaryHeap::Insert(double k, int s)
+void BinaryHeap::Insert(T_WEIGHT k, int s)
 {
 	//Ajust the structures to fit new data
 	if(s >= (int)pos.size())
@@ -71,7 +71,7 @@ int BinaryHeap::DeleteMin()
 	return min;
 }
 
-void BinaryHeap::ChangeKey(double k, int s)
+void BinaryHeap::ChangeKey(T_WEIGHT k, int s)
 {
 	Remove(s);
 	Insert(k, s);

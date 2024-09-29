@@ -419,7 +419,7 @@ int Matching::Blossom(int u, int v)
 
 void Matching::UpdateDualCosts()
 {
-	double e1 = 0, e2 = 0, e3 = 0;
+	T_WEIGHT e1 = 0, e2 = 0, e3 = 0;
 	int inite1 = false, inite2 = false, inite3 = false;
 	for(int i = 0; i < m; i++)
 	{
@@ -451,7 +451,7 @@ void Matching::UpdateDualCosts()
 			inite3 = true;
 		}	
 	}
-	double e = 0;
+	T_WEIGHT e = 0;
 	if(inite1) e = e1;
 	else if(inite2) e = e2;
 	else if(inite3) e = e3;
@@ -483,9 +483,9 @@ void Matching::UpdateDualCosts()
 		if(outer[u] != outer[v])
 		{	
 			if(type[outer[u]] == EVEN and type[outer[v]] == EVEN)
-				slack[i] -= 2.0*e;
+				slack[i] -= e*2.0;
 			else if(type[outer[u]] == ODD and type[outer[v]] == ODD)
-				slack[i] += 2.0*e;
+				slack[i] += e*2.0;
 			else if( (type[outer[v]] == UNLABELED and type[outer[u]] == EVEN) or (type[outer[u]] == UNLABELED and type[outer[v]] == EVEN) )
 				slack[i] -= e;
 			else if( (type[outer[v]] == UNLABELED and type[outer[u]] == ODD) or (type[outer[u]] == UNLABELED and type[outer[v]] == ODD) )
@@ -514,7 +514,7 @@ void Matching::UpdateDualCosts()
 	}	
 }
 
-pair< list<int>, double> Matching::SolveMinimumCostPerfectMatching(const vector<double> & cost)
+pair< list<int>, T_WEIGHT> Matching::SolveMinimumCostPerfectMatching(const vector<T_WEIGHT> & cost)
 {
 	SolveMaximumMatching();
 	if(!perfect)
@@ -542,23 +542,23 @@ pair< list<int>, double> Matching::SolveMinimumCostPerfectMatching(const vector<
 
 	list<int> matching = RetrieveMatching();
 
-	double obj = 0;
+	T_WEIGHT obj = 0;
 	for(list<int>::iterator it = matching.begin(); it != matching.end(); it++)
 		obj += cost[*it];
 	
-	double dualObj = 0;
+	T_WEIGHT dualObj = 0;
 	for(int i = 0; i < 2*n; i++)
 	{
 		if(i < n) dualObj += dual[i];
 		else if(blocked[i]) dualObj += dual[i];	
 	}
 	
-	return pair< list<int>, double >(matching, obj);
+	return pair< list<int>, T_WEIGHT >(matching, obj);
 }
 
 void Matching::PositiveCosts()
 {
-	double minEdge = 0;
+	T_WEIGHT minEdge = 0;
 	for(int i = 0; i < m ;i++)
 		if(GREATER(minEdge - slack[i], 0)) 
 			minEdge = slack[i];
