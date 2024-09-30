@@ -6,6 +6,6 @@
 #define TYPES_H
 
 #include "../gmpwrap/gmpwrap.h"
-#define T_WEIGHT BigFloat<128>
+#define T_WEIGHT BigFloat
 
 #endif //TYPES_H
