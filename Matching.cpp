@@ -1,5 +1,8 @@
 #include "Matching.h"
 
+#include <iostream>
+#include <ostream>
+
 Matching::Matching(const Graph & G):
 	G(G),
 	outer(2*G.GetNumVertices()),
@@ -456,8 +459,10 @@ void Matching::UpdateDualCosts()
 	else if(inite2) e = e2;
 	else if(inite3) e = e3;
 
-	if(GREATER(e, e2/2.0) and inite2)
+	if(GREATER(e, e2/2.0) and inite2) {
+		std::cout << e2/2.0 << std::endl;
 		e = e2/2.0;
+	}
 	if(GREATER(e, e3) and inite3)
 		e = e3;
 	 

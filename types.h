@@ -6,6 +6,6 @@
 #define TYPES_H
 
 #include "gmpwrap/src/gmpwrap.h"
-#define T_WEIGHT BigInteger
+#define T_WEIGHT BigFloat
 
 #endif //TYPES_H
