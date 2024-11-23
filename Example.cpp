@@ -153,7 +153,6 @@ int main(int argc, char* argv[])
 {
 	string filename = "";
 	string algorithm = "";
-    set_precision(256);
 
 	int i = 1;
 	while(i < argc)

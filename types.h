@@ -5,7 +5,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#include "gmpwrap/gmpwrap.h"
-#define T_WEIGHT BigFloat
+#include "gmpwrap/src/gmpwrap.h"
+#define T_WEIGHT BigInteger
 
 #endif //TYPES_H
